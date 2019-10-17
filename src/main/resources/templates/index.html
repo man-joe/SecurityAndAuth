@@ -8,5 +8,7 @@
 <!--<h2>It works!</h2>-->
 </body>
 <h2>Insecure Page</h2>
+<p th:if="${user_id != null}"></p>
+<p th:text="'Current Logged in as: ' + ${user.username}"></p>
 <a href="/secure">Secure Page</a>
 </html>

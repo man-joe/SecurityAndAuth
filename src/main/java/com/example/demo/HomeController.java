@@ -15,6 +15,8 @@ import java.security.Principal;
 @Controller
 public class HomeController {
     @Autowired UserService userService;
+    @Autowired UserRepository userRepository;
+
 
     @GetMapping("/register")
     public String showRegistrationPage(Model model){
@@ -33,12 +35,14 @@ public class HomeController {
         }
         return "index";
     }
-
     @RequestMapping("/")
-    public String index(){
+    public String index(Model model){
+        if(userService.getUser() != null) {
+            model.addAttribute("user_id", userService.getUser().getId());
+        }
         return "index";
     }
-    @RequestMapping("login")
+    @RequestMapping("/login")
     public String login(){
         return "login";
     }
@@ -46,8 +50,6 @@ public class HomeController {
 //    public String admin(){
 //        return "admin";
 //    }
-
-    @Autowired UserRepository userRepository;
 
     @RequestMapping("/secure")
     public String secure(Principal principal, Model model){

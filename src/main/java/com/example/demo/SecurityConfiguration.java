@@ -28,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new SSUserDetailsService(userRepository);
     }
     @Override
+    //Secures Certain pages depending on who is logged in
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/","h2-console/**", "/register").permitAll()
